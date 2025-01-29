@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://k7csene17qd6"]
 
 [ext_resource type="PackedScene" uid="uid://b1psrvrrybe56" path="res://scenes/bird.tscn" id="1_ufkgo"]
-[ext_resource type="PackedScene" uid="uid://0pgbxn8aqkjt" path="res://scenes/pipe.tscn" id="2_gjiha"]
+[ext_resource type="Script" path="res://scenes/pipe_manager.gd" id="2_ab2t5"]
 
 [node name="Level 1" type="Node2D"]
 
@@ -9,12 +9,17 @@
 position = Vector2(100, 540)
 scale = Vector2(2, 2)
 
-[node name="Pipes" type="Node2D" parent="."]
+[node name="Floor" type="Node2D" parent="."]
 
-[node name="Pipe" parent="Pipes" instance=ExtResource("2_gjiha")]
-position = Vector2(100, 1400)
-scale = Vector2(2, 2)
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+offset_left = -4.0
+offset_top = 957.0
+offset_right = 614.0
+offset_bottom = 1085.0
 
-[node name="Pipe2" parent="Pipes" instance=ExtResource("2_gjiha")]
-position = Vector2(100, -300)
-scale = Vector2(2, -2)
+[node name="PipeManager" type="Node" parent="."]
+script = ExtResource("2_ab2t5")
+
+[node name="Timer" type="Timer" parent="PipeManager"]
+wait_time = 3.0
+autostart = true

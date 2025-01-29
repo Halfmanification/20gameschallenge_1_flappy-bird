@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c48j0nmf5t8f6"]
+
+[ext_resource type="Script" path="res://scripts/pipe_pair.gd" id="1_w0puq"]
+[ext_resource type="PackedScene" uid="uid://0pgbxn8aqkjt" path="res://scenes/pipe.tscn" id="2_73tgj"]
+
+[node name="PipePair" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_w0puq")
+
+[node name="TopPipe" parent="." instance=ExtResource("2_73tgj")]
+position = Vector2(0, -256)
+scale = Vector2(1, -1)
+
+[node name="BottomPipe" parent="." instance=ExtResource("2_73tgj")]
+position = Vector2(0, 256)

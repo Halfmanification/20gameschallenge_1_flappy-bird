@@ -6,10 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ml1pr"]
 size = Vector2(30, 512)
 
-[node name="Pipe" type="CharacterBody2D"]
+[node name="Pipe" type="Area2D"]
 script = ExtResource("1_t2usq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("1_i38qq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

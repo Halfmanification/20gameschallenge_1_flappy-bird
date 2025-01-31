@@ -14,6 +14,11 @@ config/name="Flappy Bird"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signals="*res://scripts/signals.gd"
+GameState="*res://scripts/game_state.gd"
+
 [display]
 
 window/size/viewport_width=608

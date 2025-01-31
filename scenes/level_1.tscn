@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://k7csene17qd6"]
+[gd_scene load_steps=4 format=3 uid="uid://k7csene17qd6"]
 
 [ext_resource type="PackedScene" uid="uid://b1psrvrrybe56" path="res://scenes/bird.tscn" id="1_ufkgo"]
 [ext_resource type="Script" path="res://scenes/pipe_manager.gd" id="2_ab2t5"]
+[ext_resource type="PackedScene" uid="uid://b57fl60eta7ep" path="res://scenes/game_ui.tscn" id="3_mcyky"]
 
 [node name="Level 1" type="Node2D"]
 
@@ -23,3 +24,5 @@ script = ExtResource("2_ab2t5")
 [node name="Timer" type="Timer" parent="PipeManager"]
 wait_time = 3.0
 autostart = true
+
+[node name="GameUi" parent="." instance=ExtResource("3_mcyky")]

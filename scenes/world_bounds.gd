@@ -1,5 +1,4 @@
 extends Area2D
-class_name Pipe
 
 func _ready():
 	self.body_entered.connect(_on_body_entered)

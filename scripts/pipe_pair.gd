@@ -15,7 +15,7 @@ func _ready():
 	var opening := randf_range(min_opening, max_opening)
 	top_pipe.position.y -= opening/2
 	bottom_pipe.position.y += opening/2
-	position.y = randi_range(opening, 800)
+	position.y = randi_range(opening + 50, 800)
 
 func _physics_process(delta):
 	position.x -= speed * delta

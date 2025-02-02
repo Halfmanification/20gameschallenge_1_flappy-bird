@@ -1,9 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://k7csene17qd6"]
+[gd_scene load_steps=18 format=3 uid="uid://k7csene17qd6"]
 
 [ext_resource type="PackedScene" uid="uid://b1psrvrrybe56" path="res://scenes/bird.tscn" id="1_ufkgo"]
+[ext_resource type="Texture2D" uid="uid://bm676ilxf5q28" path="res://assets/art/ready/Background_landscape.png" id="2_5h52r"]
 [ext_resource type="Script" path="res://scenes/world_bounds.gd" id="2_6m727"]
+[ext_resource type="Texture2D" uid="uid://bv2vfkkkcdv6y" path="res://assets/art/ready/background_buildings.png" id="2_48y82"]
 [ext_resource type="Script" path="res://scenes/pipe_manager.gd" id="2_ab2t5"]
+[ext_resource type="Shader" path="res://materials/scroll_texture.gdshader" id="3_2jk3m"]
+[ext_resource type="Texture2D" uid="uid://bi0favat8475w" path="res://assets/art/ready/floor.png" id="3_7r45a"]
+[ext_resource type="Texture2D" uid="uid://dw4xkgv42flyb" path="res://assets/art/ready/Clouds_behind_buildings.png" id="3_btdgu"]
 [ext_resource type="PackedScene" uid="uid://b57fl60eta7ep" path="res://scenes/game_ui.tscn" id="3_mcyky"]
+[ext_resource type="Texture2D" uid="uid://btg8am7ecy4of" path="res://assets/art/ready/sky.png" id="5_h2jvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on24s"]
+shader = ExtResource("3_2jk3m")
+shader_parameter/scroll_speed = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ffigr"]
+shader = ExtResource("3_2jk3m")
+shader_parameter/scroll_speed = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvh0d"]
+shader = ExtResource("3_2jk3m")
+shader_parameter/scroll_speed = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5n4"]
 size = Vector2(618, 22)
@@ -11,7 +29,47 @@ size = Vector2(618, 22)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cue77"]
 size = Vector2(618, 128)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uk46"]
+shader = ExtResource("3_2jk3m")
+shader_parameter/scroll_speed = 3.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0m5pq"]
+shader = ExtResource("3_2jk3m")
+shader_parameter/scroll_speed = 3.1
+
 [node name="Level 1" type="Node2D"]
+
+[node name="Background" type="Control" parent="."]
+z_index = -2
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Landscape" type="TextureRect" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_on24s")
+layout_mode = 0
+offset_right = 608.0
+offset_bottom = 1088.0
+texture = ExtResource("2_5h52r")
+
+[node name="CloudsBehindBuildings" type="TextureRect" parent="Background"]
+material = SubResource("ShaderMaterial_ffigr")
+layout_mode = 0
+offset_right = 608.0
+offset_bottom = 1088.0
+texture = ExtResource("3_btdgu")
+stretch_mode = 1
+
+[node name="Buildings" type="TextureRect" parent="Background"]
+material = SubResource("ShaderMaterial_yvh0d")
+layout_mode = 0
+offset_right = 611.0
+offset_bottom = 1092.0
+texture = ExtResource("2_48y82")
+stretch_mode = 1
 
 [node name="Bird" parent="." instance=ExtResource("1_ufkgo")]
 position = Vector2(150, 540)
@@ -21,24 +79,15 @@ scale = Vector2(2, 2)
 position = Vector2(304, 1023)
 script = ExtResource("2_6m727")
 
-[node name="CeilingColorRect" type="ColorRect" parent="WorldBounds"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -309.0
-offset_top = -1033.0
-offset_right = 309.0
-offset_bottom = -1011.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="CeilingCollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
 position = Vector2(0, -1022)
 shape = SubResource("RectangleShape2D_qt5n4")
 
-[node name="FloorColorRect" type="ColorRect" parent="WorldBounds"]
+[node name="FloorCollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
+shape = SubResource("RectangleShape2D_cue77")
+
+[node name="FloorTextureRect" type="TextureRect" parent="WorldBounds"]
+material = SubResource("ShaderMaterial_6uk46")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -50,9 +99,21 @@ offset_right = 309.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_7r45a")
+stretch_mode = 1
 
-[node name="FloorCollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
-shape = SubResource("RectangleShape2D_cue77")
+[node name="CeilingTextureRect" type="TextureRect" parent="WorldBounds"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_0m5pq")
+offset_left = -309.0
+offset_top = -1033.0
+offset_right = 310.0
+offset_bottom = -1001.0
+texture = ExtResource("5_h2jvh")
+stretch_mode = 1
 
 [node name="PipeManager" type="Node" parent="."]
 script = ExtResource("2_ab2t5")

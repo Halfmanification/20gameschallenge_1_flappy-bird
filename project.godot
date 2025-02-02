@@ -23,6 +23,8 @@ GameState="*res://scripts/game_state.gd"
 
 window/size/viewport_width=608
 window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [input]
 

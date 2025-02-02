@@ -23,6 +23,5 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_body_entered(body: Node2D):
-	print(body)
 	if body is Bird:
 		Signals.goal_reached.emit()

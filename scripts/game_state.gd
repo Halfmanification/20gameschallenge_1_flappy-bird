@@ -11,5 +11,4 @@ func _on_goal_reached():
 	Signals.score_updated.emit(player_score)
 
 func _on_bird_crashed():
-	print("Bird crashed")
 	get_tree().quit()

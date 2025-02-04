@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://k7csene17qd6"]
+[gd_scene load_steps=20 format=3 uid="uid://k7csene17qd6"]
 
+[ext_resource type="Script" path="res://scenes/main_game_node.gd" id="1_lx1ps"]
 [ext_resource type="PackedScene" uid="uid://b1psrvrrybe56" path="res://scenes/bird.tscn" id="1_ufkgo"]
 [ext_resource type="Texture2D" uid="uid://bm676ilxf5q28" path="res://assets/art/ready/Background_landscape.png" id="2_5h52r"]
 [ext_resource type="Script" path="res://scenes/world_bounds.gd" id="2_6m727"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dw4xkgv42flyb" path="res://assets/art/ready/Clouds_behind_buildings.png" id="3_btdgu"]
 [ext_resource type="PackedScene" uid="uid://b57fl60eta7ep" path="res://scenes/game_ui.tscn" id="3_mcyky"]
 [ext_resource type="Texture2D" uid="uid://btg8am7ecy4of" path="res://assets/art/ready/sky.png" id="5_h2jvh"]
+[ext_resource type="PackedScene" uid="uid://bwyevej67wxad" path="res://scenes/main_menu.tscn" id="11_qlixl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_on24s"]
 shader = ExtResource("3_2jk3m")
@@ -37,9 +39,12 @@ shader_parameter/scroll_speed = 3.1
 shader = ExtResource("3_2jk3m")
 shader_parameter/scroll_speed = 3.1
 
-[node name="Level 1" type="Node2D"]
+[node name="MainGameNode" type="Node"]
+script = ExtResource("1_lx1ps")
 
-[node name="Background" type="Control" parent="."]
+[node name="Level 1" type="Node2D" parent="."]
+
+[node name="Background" type="Control" parent="Level 1"]
 z_index = -2
 texture_filter = 1
 layout_mode = 3
@@ -47,7 +52,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Landscape" type="TextureRect" parent="Background"]
+[node name="Landscape" type="TextureRect" parent="Level 1/Background"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_on24s")
 layout_mode = 0
@@ -55,7 +60,7 @@ offset_right = 608.0
 offset_bottom = 1088.0
 texture = ExtResource("2_5h52r")
 
-[node name="CloudsBehindBuildings" type="TextureRect" parent="Background"]
+[node name="CloudsBehindBuildings" type="TextureRect" parent="Level 1/Background"]
 material = SubResource("ShaderMaterial_ffigr")
 layout_mode = 0
 offset_right = 608.0
@@ -63,7 +68,7 @@ offset_bottom = 1088.0
 texture = ExtResource("3_btdgu")
 stretch_mode = 1
 
-[node name="Buildings" type="TextureRect" parent="Background"]
+[node name="Buildings" type="TextureRect" parent="Level 1/Background"]
 material = SubResource("ShaderMaterial_yvh0d")
 layout_mode = 0
 offset_right = 611.0
@@ -71,22 +76,23 @@ offset_bottom = 1092.0
 texture = ExtResource("2_48y82")
 stretch_mode = 1
 
-[node name="Bird" parent="." instance=ExtResource("1_ufkgo")]
-position = Vector2(150, 540)
+[node name="Bird" parent="Level 1" instance=ExtResource("1_ufkgo")]
+unique_name_in_owner = true
+position = Vector2(150, 500)
 scale = Vector2(2, 2)
 
-[node name="WorldBounds" type="Area2D" parent="."]
+[node name="WorldBounds" type="Area2D" parent="Level 1"]
 position = Vector2(304, 1023)
 script = ExtResource("2_6m727")
 
-[node name="CeilingCollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
+[node name="CeilingCollisionShape2D" type="CollisionShape2D" parent="Level 1/WorldBounds"]
 position = Vector2(0, -1022)
 shape = SubResource("RectangleShape2D_qt5n4")
 
-[node name="FloorCollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
+[node name="FloorCollisionShape2D" type="CollisionShape2D" parent="Level 1/WorldBounds"]
 shape = SubResource("RectangleShape2D_cue77")
 
-[node name="FloorTextureRect" type="TextureRect" parent="WorldBounds"]
+[node name="FloorTextureRect" type="TextureRect" parent="Level 1/WorldBounds"]
 material = SubResource("ShaderMaterial_6uk46")
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,7 +110,7 @@ size_flags_vertical = 4
 texture = ExtResource("3_7r45a")
 stretch_mode = 1
 
-[node name="CeilingTextureRect" type="TextureRect" parent="WorldBounds"]
+[node name="CeilingTextureRect" type="TextureRect" parent="Level 1/WorldBounds"]
 texture_filter = 1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_0m5pq")
@@ -115,11 +121,12 @@ offset_bottom = -1001.0
 texture = ExtResource("5_h2jvh")
 stretch_mode = 1
 
-[node name="PipeManager" type="Node" parent="."]
+[node name="PipeManager" type="Node" parent="Level 1"]
 script = ExtResource("2_ab2t5")
 
-[node name="Timer" type="Timer" parent="PipeManager"]
+[node name="Timer" type="Timer" parent="Level 1/PipeManager"]
 wait_time = 3.0
-autostart = true
 
-[node name="GameUi" parent="." instance=ExtResource("3_mcyky")]
+[node name="GameUi" parent="Level 1" instance=ExtResource("3_mcyky")]
+
+[node name="MainMenu" parent="." instance=ExtResource("11_qlixl")]

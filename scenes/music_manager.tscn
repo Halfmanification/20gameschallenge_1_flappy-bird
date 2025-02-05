@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://4f2a0odvol1u"]
+
+[ext_resource type="AudioStream" uid="uid://n45jgmirfhp0" path="res://sound/music/main_game_music.mp3" id="1_38dmo"]
+[ext_resource type="Script" path="res://scripts/music_manager.gd" id="1_r1b6s"]
+[ext_resource type="AudioStream" uid="uid://ckari3j5uui67" path="res://sound/effects/short-success-sound-glockenspiel-treasure-video-game-6346.mp3" id="3_ii1in"]
+[ext_resource type="AudioStream" uid="uid://dsw6q1biwgmwn" path="res://sound/effects/marimba-lose-250960.mp3" id="4_wvwju"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_r1b6s")
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_38dmo")
+volume_db = -10.0
+autoplay = true
+
+[node name="GoalReached" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ii1in")
+volume_db = -10.0
+
+[node name="LoseGame" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_wvwju")
+volume_db = -10.0
